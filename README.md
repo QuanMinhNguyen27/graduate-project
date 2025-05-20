@@ -1,1 +1,3 @@
 # graduate-project
+
+•	The project aims to develop a web-based platform that enhances English language learning using engaging content like movies and songs. Instead of conventional clickable subtitles, users will work with full scripts, highlighting unfamiliar words for future review. These selected words will be saved in a personalized Vocabulary Bank, which provides definitions, pronunciation, and example sentences. To reinforce learning, the platform will also feature quizzes, flashcards, and other interactive exercises.
