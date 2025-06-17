@@ -1,52 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
-</html>
-=======
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Register Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,7 +14,7 @@
             margin: 0;
             background-color: #f5f5f5;
         }
-        .login-container {
+        .register-container {
             background-color: white;
             padding: 2rem;
             border-radius: 8px;
@@ -83,7 +40,7 @@
         button {
             width: 100%;
             padding: 0.75rem;
-            background-color: #007bff;
+            background-color: #28a745;
             color: white;
             border: none;
             border-radius: 4px;
@@ -91,7 +48,7 @@
             margin-bottom: 1rem;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #218838;
         }
         .message {
             margin-top: 1rem;
@@ -106,23 +63,27 @@
             background-color: #e8f5e9;
             color: #2e7d32;
         }
-        .register-link {
+        .login-link {
             text-align: center;
             margin-top: 1rem;
         }
-        .register-link a {
+        .login-link a {
             color: #007bff;
             text-decoration: none;
         }
-        .register-link a:hover {
+        .login-link a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
+    <div class="register-container">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" required>
@@ -131,44 +92,41 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" required>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">Register</button>
         </form>
         <div id="message" class="message" style="display: none;"></div>
-        <div class="register-link">
-            Don't have an account? <a href="/register.html">Register here</a>
+        <div class="login-link">
+            Already have an account? <a href="/">Login here</a>
         </div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const messageDiv = document.getElementById('message');
 
             try {
-                const response = await fetch('http://localhost:3001/api/auth/login', {
+                const response = await fetch('http://localhost:3001/api/auth/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify({ name, email, password })
                 });
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    messageDiv.textContent = 'Login successful! Redirecting...';
+                    messageDiv.textContent = 'Registration successful! You can now login.';
                     messageDiv.className = 'message success';
-                    // Store user data in localStorage
-                    localStorage.setItem('user', JSON.stringify(data.user));
-                    // Redirect to dashboard
-                    setTimeout(() => {
-                        window.location.href = '/dashboard.html';
-                    }, 1000);
+                    // Clear the form
+                    document.getElementById('registerForm').reset();
                 } else {
-                    messageDiv.textContent = data.error || 'Login failed';
+                    messageDiv.textContent = data.error || 'Registration failed';
                     messageDiv.className = 'message error';
                 }
             } catch (error) {
@@ -181,4 +139,3 @@
     </script>
 </body>
 </html> 
->>>>>>> 5f8e54e (backend node + ORM + database)
